@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: usm-store
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: usm-store
+  template:
+    metadata:
+      labels:
+        app: usm-store
+    spec:
+      containers:
+        - name: usm-store-ctr
+          image: 5927055/usm-store:3c22bb9
+          env:
+          - name: OTEL_EXPORTER_OTLP_ENDPOINT
+            value: http://temp-service:4317
+          - name: OTEL_METRICS_EXPORTER
+            value: none 
+          - name: OTEL_TRACES_EXPORTER
+            value: otlp
+          # - name: OTEL_EXPORTER_OTLP_ENDPOINT
+          #   value: http://temp-service:4318
+          # - name: OTEL_METRICS_EXPORTER
+          #   value: none 
+          # - name: OTEL_TRACES_EXPORTER
+          #   value: zipkin   
+          # - name: OTEL_EXPORTER_ZIPKIN_ENDPOINT
+          #   value: http://temp-service:9411
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8150
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: usm-store-service
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 8150
+    nodePort: 30000
+  selector:
+    app: usm-store
+
+    

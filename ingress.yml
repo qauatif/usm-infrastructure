@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: usm
+spec:
+  rules:
+  - host: usm.rancher.localhost
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: usm-store-service
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - usm.rancher.localhost

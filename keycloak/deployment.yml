@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: usm-keycloak
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: usm-keycloak
+  template:
+    metadata:
+      labels:
+        app: usm-keycloak
+    spec:
+      containers:
+        - name: usm-keycloak-ctr
+          image: 5927055/keycloack
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: KC_DB
+              value: postgres
+            - name: KC_DB_URL_HOST
+              value: usm-db
+            - name: KC_DB_URL_DATABASE
+              value: keycloak
+            - name: KC_DB_PASSWORD
+              value: admin123
+            - name: KC_DB_USERNAME
+              value: postgres
+            - name: KC_DB_SCHEMA
+              value: public
+            - name: KEYCLOAK_ADMIN
+              value: admin
+            - name: KEYCLOAK_ADMIN_PASSWORD
+              value: admin
+            - name: KEYCLOAK_LOGLEVEL
+              value: DEBUG

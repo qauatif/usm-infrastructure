@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: usm-accounts
+spec:
+  rules:
+  - host: usm.rancher.localhost
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: usm-accounts-service
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - usm.rancher.localhost

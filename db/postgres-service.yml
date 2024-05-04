@@ -1,0 +1,19 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: usm-db
+spec:
+  clusterIP: None
+  ports:
+  - port: 5432
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: usm-db
+subsets:
+  - addresses:
+        - ip: 192.168.1.22
+    ports:
+      - port: 5432
+        name: usm-db

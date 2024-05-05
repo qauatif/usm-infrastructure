@@ -1,19 +1,26 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: usm
+  name: grafana
 spec:
   rules:
-  - host: usm.rancher.localhost
+  - host: grafana.rancher.localhost
     http:
       paths:
       - pathType: Prefix
         path: /
         backend:
           service:
-            name: usm-store-service
+            name: my-grafana
             port:
               number: 80
-  tls:
-  - hosts:
-    - usm.rancher.localhost
+  - host: keycloak.rancher.localhost
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: usm-keycloak-service
+            port:
+              number: 80

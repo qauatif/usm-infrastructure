@@ -37,3 +37,14 @@ spec:
               value: admin
             - name: KEYCLOAK_LOGLEVEL
               value: DEBUG
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: usm-keycloak-service
+spec:
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: usm-keycloak

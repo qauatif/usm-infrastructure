@@ -1,0 +1,37 @@
+java -javaagent:/Users/atifshehzad/drive/usm/opentelemetry-javaagent.jar \
+     -DOTEL_RESOURCE_ATTRIBUTES=service.name=usm-store,service.version=1.1,deployment.environment=local \
+     -DOTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:8200 \
+     -DOTEL_METRICS_EXPORTER="otlp" \
+     -DOTEL_LOGS_EXPORTER="otlp"  \
+     -jar usm-store-0.0.1-SNAPSHOT.jar
+
+
+-DOTEL_RESOURCE_ATTRIBUTES=service.name=usm-store,service.version=1.1,deployment.environment=local
+-DOTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:8200
+-DOTEL_EXPORTER_OTLP_HEADERS="Authorization=Bearer an_apm_secret_token"
+-DOTEL_METRICS_EXPORTER="otlp"
+-DOTEL_LOGS_EXPORTER="otlp" 
+java -javaagent:/path/to/opentelemetry-javaagent-all.jar \
+     -classpath lib/*:classes/ \
+     com.mycompany.checkout.CheckoutServiceServer
+
+
+
+
+
+java -javaagent:/Users/atifshehzad/drive/usm/opentelemetry-javaagent.jar \
+     -DOTEL_RESOURCE_ATTRIBUTES=service.name=usm-notification,service.version=1.1,deployment.environment=local \
+     -DOTEL_EXPORTER_ZIPKIN_ENDPOINT=http://zipkin.rancher.localhost/api/v2/spans \
+     -DOTEL_EXPORTER_OTLP_ENDPOINT=http://tempo.rancher.localhost:80 \
+     -DOTEL_TRACES_EXPORTER="zipkin" \
+     -DOTEL_METRICS_EXPORTER="otlp" \
+     -DOTEL_LOGS_EXPORTER="otlp"  \
+     -jar build/libs/usm-notification-0.0.1-SNAPSHOT.jar
+
+java -javaagent:/Users/atifshehzad/drive/usm/elastic-apm-agent-1.49.0.jar \
+-Delastic.apm.service_name=usm-store \
+-Delastic.apm.secret_token= \
+-Delastic.apm.server_url=http://localhost:8200 \
+-Delastic.apm.environment=prod \
+-Delastic.apm.application_packages=com.usm \
+-jar build/libs/usm-store-0.0.1-SNAPSHOT.jar

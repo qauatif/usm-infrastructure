@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: usm-discovery-ctr
-          image: 5927055/usm-discovery:3c22bb9
+          image: 5927055/usm-discovery:efaf9b1
           env:
           - name: OTEL_EXPORTER_OTLP_ENDPOINT
             value: http://temp-service:4317

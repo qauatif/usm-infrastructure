@@ -13,7 +13,7 @@ metadata:
   name: usm-db
 subsets:
   - addresses:
-        - ip: 192.168.1.22
+        - ip: 10.4.152.152
     ports:
       - port: 5432
         name: usm-db

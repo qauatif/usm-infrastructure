@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: usm-cm
+data:
+  eureka_service_address: http://eureka-0.eureka:8110/eureka
+  usm_db: usm-db
+  keycloak: keycloak
+  

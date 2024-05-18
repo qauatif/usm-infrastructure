@@ -1,0 +1,19 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: keycloak
+spec:
+  clusterIP: None
+  ports:
+  - port: 8072
+---
+kind: Endpoints
+apiVersion: v1
+metadata:
+  name: keycloak
+subsets:
+  - addresses:
+        - ip: 10.42.152.152
+    ports:
+      - port: 8072
+        name: keycloak
